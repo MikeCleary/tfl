@@ -10,6 +10,7 @@ A simple command line app to model the London tube network.
 ```
     cd ~/projects
     git clone <your fork>
+
 ```
 
 * Run with the following command, from the directory you just cloned into
