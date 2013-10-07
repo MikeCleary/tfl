@@ -1,15 +1,5 @@
 require 'pry'
 
-stations =[ 
-[ "Kings Cross", "Euston", "Warren Street", "Oxford Circus", 
-  "Green Park", "Victoria", "Pimlico"],
-[ "Elephant & Castle", "Lambeth North", "Waterloo", 
-  "Embankment", "Charing Cross", "Picadilly Circus", 
-  "Oxford Circus", "Regent's Park", "Baker Street" ],
-[ "Notting Hill Gate", "Queensway", "Lancaster Gate", 
-  "Marble Arch", "Bond Street", "Oxford Circus", 
-  "Tottenham Court Road", "Holborn", "Chancery Lane" ] 
-]
 
 def puts_lines
   lines = ["Victoria", "Bakerloo", "Central"]
@@ -21,6 +11,16 @@ def puts_lines
 end
 
 def puts_stations(line)
+  stations =[ 
+  [ "Kings Cross", "Euston", "Warren Street", "Oxford Circus", 
+    "Green Park", "Victoria", "Pimlico"],
+  [ "Elephant & Castle", "Lambeth North", "Waterloo", 
+    "Embankment", "Charing Cross", "Picadilly Circus", 
+    "Oxford Circus", "Regent's Park", "Baker Street" ],
+  [ "Notting Hill Gate", "Queensway", "Lancaster Gate", 
+    "Marble Arch", "Bond Street", "Oxford Circus", 
+    "Tottenham Court Road", "Holborn", "Chancery Lane" ] 
+  ]
   station_number = 0
   stations[line].each do |station|
     puts "#{station_number}. #{station}" 
@@ -37,7 +37,7 @@ def get_station(line)
   station = stations.line[gets.chomp.to_i]
 end
 
-def get_start(stations)
+def get_start
   puts_lines
   puts "Enter your starting line"
   line = get_line
