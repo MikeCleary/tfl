@@ -1,10 +1,11 @@
 require 'pry'
 class Journey
   attr_accessor :tube
-  attr_accessor :line
+  attr_accessor :line_start
+  attr_accessor :line_destination
   attr_accessor :station
   attr_accessor :start
-  attr_accessor :finish
+  attr_accessor :destination
   attr_accessor :stops
 
   def initialize
@@ -15,11 +16,11 @@ class Journey
     puts "enter line"
     input = gets.chomp
     if input.downcase == "victoria"
-      @line = tube.victoria
+      line = tube.victoria
     elsif input.downcase == "bakerloo"
-      @line = tube.bakerloo
+      line = tube.bakerloo
     elsif input.downcase == "central"
-      @line = tube.central
+      line = tube.central
     else
       puts "line not found"
       get_line
@@ -36,22 +37,34 @@ class Journey
     @station = line[gets.chomp.to_i]
   end
 
+  def calculate_leg(start, destination, line)
+    if line.index(start) < line.index(destination)
+      stops = line.index(destination) - line.index(start)
+    else
+      stops = line.index(start)  - line.index(destination)
+    end
+  end
+
   def get_journey
     puts "Start:"
-    @start = get_station(get_line)
+    line_start = get_line
+    start = get_station(line_start)
     puts "Destination:"
-    @finish = get_station(get_line)
-    if @line.index(@start) < @line.index(@finish)
-      @stops = @line.index(@finish) - @line.index(@start)
+    line_destination = get_line
+    destination = get_station(line_destination)
+
+    if line_start == line_destination 
+      stops = calculate_leg(start, destination, line_start)
     else
-      @stops = @line.index(@start)  - @line.index(@start)
+      stops = (calculate_leg(start, "Oxford Circus", line_start)) + (calculate_leg("Oxford Circus", destination, line_destination))
     end
-    puts "Your journey will take #{@stops} stops."
+    puts "Your journey will take #{stops} stops."
   end
+
 end
 
 class Tube
-  attr_accessor :tube
+  #attr_accessor :tube
   attr_accessor :victoria
   attr_accessor :bakerloo
   attr_accessor :central
